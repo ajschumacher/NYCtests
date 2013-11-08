@@ -1,0 +1,8 @@
+t <- read.csv("../data/charterELA2013.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
+t <- read.csv("../data/charterMath2013.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
+t <- read.csv("../data/charterELA2006-2012.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
+t <- read.csv("../data/charterMath2006-2012.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
+t <- read.csv("../data/nonCharterELA2013.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
+t <- read.csv("../data/nonCharterMath2013.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
+t <- read.csv("../data/nonCharterMath2006-2012.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
+t <- read.csv("../data/nonCharterELA2006-2012.csv", skip=7, header=FALSE, as.is=TRUE, na.strings=c("", "s"))
