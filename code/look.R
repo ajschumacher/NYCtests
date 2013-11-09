@@ -5,6 +5,7 @@ data <- subset(data, grade != "All Grades")
 data$grade <- paste("grade", data$grade)
 data <- data[complete.cases(data),]
 # note: 2013 has no missings for grade 7 and 8?
+data <- subset(data, substr(dbn,1,2) != "75")
 
 
 library(ggplot2)
@@ -60,7 +61,6 @@ ggplot(subset(data, subject=="Math")) + aes(x=score-mean) +
 # try to even out the spreads with the median absolute deviation (with funky constant)
 data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, mad=mad(score)))
 # also try other measures of spread
-data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, mad1=mad(score, constant=1)))
 data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, sd=sd(score)))
 # and plot normalized stuff
 ggplot(subset(data, subject=="ELA")) + aes(x=(score-mean)/mad) +
@@ -91,8 +91,9 @@ ggplot(subset(data, subject=="Math")) + aes(x=(score-mean)/mad) +
   ylab("number of schools reporting such an average") +
   ggtitle("de-meaned average Math scores by grade for all NYC public schools (charter and non-charter)")
 # okay; should really take out the D75 schools...
+# whoa out of order~ time loop~ whoa~
 
 
-ggplot(subset(data, subject=="ELA")) + aes(x=n, y=score) +
+ggplot(subset(data, subject=="ELA")) + aes(x=n, y=(score-mean)/mad) +
   geom_point() +
   facet_grid(year ~ grade) + xlab("") + ylab("")
