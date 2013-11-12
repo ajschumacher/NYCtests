@@ -29,6 +29,9 @@ library(plyr)
 
 # work out the average student score...
 data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, mean=weighted.mean(score, n)))
+# also look at some others:
+data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, straightmean=mean(score)))
+data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, straightmedian=median(score)))
 # and plot de-meaned stuff
 ggplot(subset(data, subject=="ELA")) + aes(x=score-mean) +
   geom_histogram(binwidth=1) +
@@ -63,7 +66,7 @@ data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, mad=ma
 # also try other measures of spread
 data <- merge(data, ddply(data, c("grade", "year", "subject"), summarize, sd=sd(score)))
 # and plot normalized stuff
-ggplot(subset(data, subject=="ELA")) + aes(x=(score-mean)/mad) +
+ggplot(subset(data, subject=="ELA")) + aes(x=(score-straightmedian)/mad) +
   geom_density(binwidth=0.1) +
   facet_grid(year ~ grade) +
   xlab("normalized average score") +
