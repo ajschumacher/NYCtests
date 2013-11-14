@@ -16,7 +16,6 @@ data$grade <- paste("grade", data$grade)
 
 
 library(ggplot2)
-library(Cairo)
 
 png(width=1280, height=720, filename="../figure/1a.png")
 ggplot(subset(data, subject=="Math")) + aes(x=score) +
