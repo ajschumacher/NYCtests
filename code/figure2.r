@@ -7,8 +7,7 @@ stopifnot(all(!duplicated(data[, 1:4])))
 # exactly one row per DBN-grade-year-subject
 
 # this is the one case where "All Grades" isn't the sum of all grades
-subset(data, year==2007 & subject=="ELA" & dbn=="22K245",
-       select=c("grade", "n"))
+subset(data, year==2007 & subject=="ELA" & dbn=="22K245")
 
 # add up grades to get a better all-grade total
 library(reshape)
@@ -35,8 +34,8 @@ png(width=608, height=640, filename="../figure/2.png")
 ggplot(data) + aes(x=ELA, y=Math) + geom_point(size=0.8) + coord_fixed() + theme_classic() +
   xlab("Number of students tested in ELA") + ylab("Number of students tested in Math") +
   geom_abline(intercept=0, slope=1, color="red") +
-  ggtitle("Figure 2. Number of students tested in Math and ELA\nfor all NYC public schools (charter and non-charter) grades 3-8, 2006-2013.\n(The red line is at points where the numbers are equal.)") +
-  scale_x_continuous(labels = comma) + scale_y_continuous(labels = comma)
+  ggtitle("Figure 2. Number of students tested in Math and ELA\nfor all NYC public schools (charter and non-charter) in 2006-2013.\n(The red lines show where the numbers are equal.)") +
+  scale_x_continuous(labels = comma) + scale_y_continuous(labels = comma) + facet_wrap(~year)
 dev.off()
 
 # ggplot gave us a warning to check out
