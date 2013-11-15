@@ -34,10 +34,13 @@ png(width=608, height=640, filename="../figure/2.png")
 ggplot(data) + aes(x=ELA, y=Math) + geom_point(size=0.8) + coord_fixed() + theme_classic() +
   xlab("Number of students tested in ELA") + ylab("Number of students tested in Math") +
   geom_abline(intercept=0, slope=1, color="red") +
-  ggtitle("Figure 2. Number of students tested in Math and ELA\nfor all NYC public schools (charter and non-charter) in 2006-2013.\n(The red lines show where the numbers are equal.)") +
+  ggtitle("Figure 2. Number of students tested in Math vs. ELA\nfor all NYC public schools (charter and non-charter) in 2006-2013.\n(The red lines show where the numbers are equal.)") +
   scale_x_continuous(labels = comma) + scale_y_continuous(labels = comma) + facet_wrap(~year)
 dev.off()
 
 # ggplot gave us a warning to check out
 data[!complete.cases(data), ]
 # very rarely a school tests in only one or the other subjects
+
+# and the graph attracts our attention to this school:
+subset(data, dbn=="30Q235")
