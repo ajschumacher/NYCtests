@@ -38,7 +38,7 @@ b <- ggplot(summary) + aes(x=year, y=n) + geom_point() + geom_line() +
   theme_classic() + xlab("") + ylab("students (absolute scale)")
 
 png(width=800, height=400, filename="../figure/4a.png")
-grid.arrange(b, a, main="\nFigure 4a. Lower bound on the number of tested students in NYC public schools (charter and non-charter) in 2006-2013")
+grid.arrange(b, a, main="\nFigure 4a. Lower bound on the number of grade 3-8 tested students in NYC public schools (charter and non-charter) in 2006-2013")
 dev.off()
 
 a <- ggplot(summary) + aes(x=year, y=m) + geom_point() + geom_line() +
@@ -49,5 +49,5 @@ b <- ggplot(summary) + aes(x=year, y=m) + geom_point() + geom_line() +
   theme_classic() + xlab("") + ylab("tests (absolute scale)")
 
 png(width=800, height=400, filename="../figure/4b.png")
-grid.arrange(b, a, main="\nFigure 4b. Total number of Math and ELA tests reported for NYC public schools (charter and non-charter) in 2006-2013")
+grid.arrange(b, a, main="\nFigure 4b. Total number of grade 3-8 Math and ELA tests reported for NYC public schools (charter and non-charter) in 2006-2013")
 dev.off()
