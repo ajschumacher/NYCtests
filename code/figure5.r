@@ -29,6 +29,7 @@ summary <- ddply(data, .(year, grade), summarize, n = sum(n), m=sum(m))
 
 library(ggplot2)
 library(scales)
+library(gridExtra)
 
 a <- ggplot(summary) + aes(x=paste("grade", grade), y=n) + geom_point() +
   theme_bw() + scale_y_continuous(labels=comma) + xlab("") +
