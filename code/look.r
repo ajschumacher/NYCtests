@@ -1,11 +1,23 @@
 
 data <- read.csv("../data/all.csv", as.is=TRUE)
 
+stopifnot(all(!is.na(data$n)))
+# everything has a student count
+stopifnot(all(!duplicated(data[, 1:4])))
+# exactly one row per DBN-grade-year-subject
+
+# best not to use the pre-computed sums; one error as seen earlier
 data <- subset(data, grade != "All Grades")
-data$grade <- paste("grade", data$grade)
-data <- data[complete.cases(data),]
-# note: 2013 has no missings for grade 7 and 8?
+data$grade <- as.numeric(data$grade)
+
+# remove D75; have seen issues with these schools
 data <- subset(data, substr(dbn,1,2) != "75")
+
+stopifnot(sum(is.na(data$score))==sum(is.na(data)))
+stopifnot(sum(is.na(data$score))==94)
+stopifnot(all(data$n[is.na(data$score)] <= 5))
+# these are suppressed values and there's nothing to be done with them
+data <- data[complete.cases(data),]
 
 
 library(ggplot2)
